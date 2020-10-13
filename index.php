@@ -53,7 +53,7 @@ function is_cnp($CNP, $options = null)
         case 9:{
                 $an += 1900;
             }
-            break; // Rezidenti pentru 7-8 si Cetateni Straini totii intre 1900-1999
+            break; // Rezidenti[7/8] si Cetateni Straini totii intre 1900-1999
         
         default: return false; // Daca nr este 0 spre exemplu
             
