@@ -2,8 +2,16 @@
 // VALIDARE CNP
 
 
-function validareCNP($CNP)
+/**
+*
+*@param string|int $CNP CNP number that is going to get validated
+*@param string $options null by default | 
+*@return bool
+*/
+
+function is_cnp($CNP, $options = null)
 {
+
     // CNP must have 13 characters
     if (strlen($CNP) != 13 && !is_numeric($CNP)) {
         return false;
@@ -14,7 +22,7 @@ function validareCNP($CNP)
     #SEXUL
 
     $sex = $cnp[0];
-    $sex == 9 ? ($sex = 'strain') : ($sex % 2 ? $sex = 'masculin' : $sex = 'feminin'); // schimb valoarea $sex din numar
+    (int) $sex == 9 ? ($sex = 'strain') : ($sex % 2 ? $sex = 'masculin' : $sex = 'feminin'); // schimb valoarea $sex din numar
 
     #Anul Nasterii
 
@@ -41,36 +49,34 @@ function validareCNP($CNP)
                 $an += 1900;
             }
             break; // rezidenti si Cetateni Straini
-
+        
+        default: return false;
+            
     }
 
     $ziuaNasterii = $cnp[4][5] . '/' . $cnp[6][7] . '/' . $an; //ziua de nastere
 
     ####
-    
-    
+
     ####JUDETUL####
-
-
-
-
+    
+    
+    
+    
     ####
-
+        
     ####Validare Numarul NNN####
 
 
 
-    
+
+
     ####
-
-
+   
     ####ALGORITMUL DE VALIDARE CIFRA CONTROL CU TABEL DE CONTROL####
-    
 
     $tabelControl = array(2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9); // numarul de control
-    $cifraControl = 0; // declar cifra de control ca variabila
-
-
+    $cifraControl = 0; // declar cifra de control
 
     for ($i = 0; $i < 13; $i++) {
         if (!is_numeric($cnp[$i])) {
@@ -82,7 +88,7 @@ function validareCNP($CNP)
         }
     }
 
-    $cifraControl = $cifraControl % 11;
+    $cifraControl = $cifraControl % 11; 
     if ($cifraControl == 10) {
         $cifraControl = 1;
     }
